@@ -47,12 +47,13 @@ func CreateDatabase(uri string, dbName string) (*Database, error) {
 	return singleton, nil
 }
 
-func (database *Database) getDatabase(databaseName string) (*mgo.Database, *mgo.Session) {
-	fmt.Println("\ngetDatabase - Creating database session")
+//GetSession ... Return the mongo db and session
+func (database *Database) GetSession() (*mgo.Database, *mgo.Session) {
+	fmt.Println("\nGetSession - Creating database session")
 	session := database.session.Copy()
 	// Error check on every access
 	session.SetSafe(&mgo.Safe{WTimeout: DBWTimeout})
 
-	db := session.DB(databaseName)
+	db := session.DB(database.name)
 	return db, session
 }

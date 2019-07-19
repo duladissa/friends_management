@@ -11,7 +11,7 @@ func Test_database_connection(t *testing.T) {
 		t.Error("Database Connection Failed")
 	}
 
-	mgoDB, _ := database.getDatabase(dbName)
+	mgoDB, _ := database.getDatabase()
 	if mgoDB == nil {
 		t.Error("MGO Database Connection Failed")
 	}

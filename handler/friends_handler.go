@@ -3,24 +3,54 @@ package handler
 import (
 	"context"
 
+	"github.com/duladissa/friends_management/dao"
 	"github.com/duladissa/friends_management/database"
+	"github.com/duladissa/friends_management/models"
 	"github.com/duladissa/friends_management/restapi/operations/friends"
 	"github.com/go-openapi/runtime/middleware"
 )
 
 //FriendsAPI ... Friends API implementation
 type FriendsAPI struct {
-	database *database.Database
+	// database *database.Database
+	friend *dao.FriendDAO
 }
 
 //NewFriendsAPI ... Create New NewFriendsAPI
 func NewFriendsAPI(db *database.Database) *FriendsAPI {
-	return &FriendsAPI{database: db}
+	return &FriendsAPI{
+		// database: db,
+		friend: dao.NewFriendDAO(db)}
 }
 
 // PostFriendsConnections is 1. As a user, I need an API to create a friend connection between two email addresses.
 func (f *FriendsAPI) PostFriendsConnections(ctx context.Context, params friends.PostFriendsConnectionsParams) middleware.Responder {
-	return nil
+	isAdded := false
+	var err error
+	var errorResponse models.ErrorResponse
+	if len(params.Body.Friends) > 2 {
+		errorResponse = models.ErrorResponse{
+			Success: &isAdded,
+			Message: "Bad input values",
+			Type:    "exception",
+		}
+		return friends.NewPostFriendsConnectionsBadRequest().WithPayload(&errorResponse)
+	}
+
+	isAdded, err = f.friend.Create(params.Body)
+	if err != nil {
+		errorResponse = models.ErrorResponse{
+			Success: &isAdded,
+			Message: err.Error(),
+			Type:    "exception",
+		}
+		return friends.NewPostFriendsConnectionsNotFound().WithPayload(&errorResponse)
+	}
+
+	success := models.SuccessResponse{
+		Success: &isAdded,
+	}
+	return friends.NewPostFriendsConnectionsOK().WithPayload(&success)
 }
 
 // PostFriendsConnectionsList is 2. As a user, I need an API to retrieve the friends list for an email address.

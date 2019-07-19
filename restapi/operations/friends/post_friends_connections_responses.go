@@ -57,6 +57,50 @@ func (o *PostFriendsConnectionsOK) WriteResponse(rw http.ResponseWriter, produce
 	}
 }
 
+// PostFriendsConnectionsBadRequestCode is the HTTP code returned for type PostFriendsConnectionsBadRequest
+const PostFriendsConnectionsBadRequestCode int = 400
+
+/*PostFriendsConnectionsBadRequest Bad request
+
+swagger:response postFriendsConnectionsBadRequest
+*/
+type PostFriendsConnectionsBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.ErrorResponse `json:"body,omitempty"`
+}
+
+// NewPostFriendsConnectionsBadRequest creates PostFriendsConnectionsBadRequest with default headers values
+func NewPostFriendsConnectionsBadRequest() *PostFriendsConnectionsBadRequest {
+
+	return &PostFriendsConnectionsBadRequest{}
+}
+
+// WithPayload adds the payload to the post friends connections bad request response
+func (o *PostFriendsConnectionsBadRequest) WithPayload(payload *models.ErrorResponse) *PostFriendsConnectionsBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the post friends connections bad request response
+func (o *PostFriendsConnectionsBadRequest) SetPayload(payload *models.ErrorResponse) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *PostFriendsConnectionsBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // PostFriendsConnectionsUnauthorizedCode is the HTTP code returned for type PostFriendsConnectionsUnauthorized
 const PostFriendsConnectionsUnauthorizedCode int = 401
 
