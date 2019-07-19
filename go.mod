@@ -16,4 +16,5 @@ require (
 	github.com/kataras/golog v0.0.0-20190624001437-99c81de45f40
 	github.com/kataras/pio v0.0.0-20190103105442-ea782b38602d // indirect
 	github.com/spf13/viper v1.4.0
+	gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce
 )

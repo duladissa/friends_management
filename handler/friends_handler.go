@@ -3,17 +3,19 @@ package handler
 import (
 	"context"
 
+	"github.com/duladissa/friends_management/database"
 	"github.com/duladissa/friends_management/restapi/operations/friends"
 	"github.com/go-openapi/runtime/middleware"
 )
 
 //FriendsAPI ... Friends API implementation
 type FriendsAPI struct {
+	database *database.Database
 }
 
 //NewFriendsAPI ... Create New NewFriendsAPI
-func NewFriendsAPI() *FriendsAPI {
-	return &FriendsAPI{}
+func NewFriendsAPI(db *database.Database) *FriendsAPI {
+	return &FriendsAPI{database: db}
 }
 
 // PostFriendsConnections is 1. As a user, I need an API to create a friend connection between two email addresses.
