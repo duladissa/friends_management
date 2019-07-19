@@ -13,14 +13,17 @@ import (
 //FriendsAPI ... Friends API implementation
 type FriendsAPI struct {
 	// database *database.Database
-	friend *dao.FriendDAO
+	friend  *dao.FriendDAO
+	updates *dao.UpdatesDAO
 }
 
 //NewFriendsAPI ... Create New NewFriendsAPI
 func NewFriendsAPI(db *database.Database) *FriendsAPI {
 	return &FriendsAPI{
 		// database: db,
-		friend: dao.NewFriendDAO(db)}
+		friend:  dao.NewFriendDAO(db),
+		updates: dao.NewUpdatesDAO(db),
+	}
 }
 
 // PostFriendsConnections is 1. As a user, I need an API to create a friend connection between two email addresses.
@@ -103,7 +106,20 @@ func (f *FriendsAPI) PostFriendsCommonList(ctx context.Context, params friends.P
 
 // PostFriendsUpdatesSubscribe is 4. As a user, I need an API to subscribe to updates from an email address.</br> Please note that subscribing to updates is NOT equivalent to adding a friend connection
 func (f *FriendsAPI) PostFriendsUpdatesSubscribe(ctx context.Context, params friends.PostFriendsUpdatesSubscribeParams) middleware.Responder {
-	return nil
+	isAdded, err := f.updates.Create(params.Body)
+	if err != nil {
+		errorResponse := models.ErrorResponse{
+			Success: &isAdded,
+			Message: err.Error(),
+			Type:    "exception",
+		}
+		return friends.NewPostFriendsUpdatesSubscribeNotFound().WithPayload(&errorResponse)
+	}
+
+	success := models.SuccessResponse{
+		Success: &isAdded,
+	}
+	return friends.NewPostFriendsUpdatesBlockOK().WithPayload(&success)
 }
 
 // PostFriendsUpdatesBlock is 5. As a user, I need an API to block updates from an email address.</br> Suppose andy@example.com blocks john@example.com:</br> <ul> <li>if they are connected as friends, then andy will no longer receive notifications from john</li> <li>if they are not connected as friends, then no new friends connection can be added</li> </ul>

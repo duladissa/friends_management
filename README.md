@@ -26,3 +26,6 @@ To stop the development server:
 Stop Docker development server and remove containers:
 
 * `$ docker-compose down`
+
+## API Documentation
+http://localhost:8888/api/v1/docs

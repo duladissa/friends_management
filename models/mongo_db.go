@@ -8,3 +8,10 @@ type DBFriends struct {
 	UserID  string        `bson:"user_id,omitempty"`
 	Friends []string      `bson:"friends,omitempty"`
 }
+
+//DBUpdates ... Database Model Updates
+type DBUpdates struct {
+	ID     bson.ObjectId `bson:"_id,omitempty"`
+	UserID string        `bson:"user_id,omitempty"`
+	Target []string      `bson:"target,omitempty"`
+}
