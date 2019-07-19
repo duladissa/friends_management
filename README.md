@@ -29,3 +29,10 @@ Stop Docker development server and remove containers:
 
 ## API Documentation
 http://localhost:8888/api/v1/docs
+
+## Dependancies/Technologies Used
+* [Go](https://golang.org/) The Go Language.
+* [MongoDB](https://www.mongodb.com/) MongoDB.
+* [mgo](https://gopkg.in/mgo.v2) MongoDB driver for Go.
+* [go-swagger](https://goswagger.io/) Swagger 2.0 for [Go].
+* [Docker](https://www.docker.com/) Docker/Docker compose.

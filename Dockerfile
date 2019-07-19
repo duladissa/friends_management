@@ -34,5 +34,8 @@ WORKDIR /app/
 COPY --from=server_builder /go/src/github.com/duladissa/friends_management/friends_management_server .
 ENV PORT 8888
 EXPOSE 8888
+
+ENV MONGODB_URI=mongodb://mongo:27017
+
 # Run the executable
 CMD ["./friends_management_server"]

@@ -10,5 +10,7 @@ services:
   mongo:
     image: 'mongo:latest'
     container_name: 'mongo'
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
     ports:
-      - '27100:27017'
+      - '27017:27017'
