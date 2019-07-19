@@ -6,6 +6,7 @@ import (
 
 	"github.com/duladissa/friends_management/database"
 	"github.com/duladissa/friends_management/models"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -51,8 +52,8 @@ func (f *FriendDAO) Create(friends *models.Friends) (bool, error) {
 	return true, nil
 }
 
-//Find ... Find friends for a given user
-func (f *FriendDAO) Find(user *models.Friend) (map[string]bool, error) {
+//FindFriends ... Find friends for a given user
+func (f *FriendDAO) FindFriends(user *models.Friend) (map[string]bool, error) {
 	db, session := f.database.GetSession()
 	defer session.Close()
 
@@ -60,6 +61,46 @@ func (f *FriendDAO) Find(user *models.Friend) (map[string]bool, error) {
 	//Sanitizing the emails
 	userID := strings.ToLower(user.Email)
 
+	results, err := f.findFriends(userID, collection)
+
+	return results, err
+}
+
+//FindCommonFriends ... Find Common friends for a given user
+func (f *FriendDAO) FindCommonFriends(friends *models.Friends) ([]string, error) {
+	db, session := f.database.GetSession()
+	defer session.Close()
+
+	collection := db.C(FriendsCollection)
+
+	combinedFriends := make(map[string]int, 0)
+	for _, friend := range friends.Friends {
+		foundFriends, err := f.findFriends(friend, collection)
+		if err == nil {
+			for k := range foundFriends {
+				count := combinedFriends[k]
+				if count == 0 {
+					combinedFriends[k] = 1
+				} else if count > 0 {
+					combinedFriends[k] = count + 1
+				}
+			}
+		}
+	}
+
+	if len(combinedFriends) > 0 {
+		commonFriends := make([]string, 0)
+		for k, v := range combinedFriends {
+			if v > 1 {
+				commonFriends = append(commonFriends, k)
+			}
+		}
+		return commonFriends, nil
+	}
+	return nil, errors.New("No common friends available")
+}
+
+func (f *FriendDAO) findFriends(userID string, collection *mgo.Collection) (map[string]bool, error) {
 	friends := make([]models.DBFriends, 0)
 	condition1 := bson.M{"user_id": userID}
 	collection.Find(condition1).All(&friends)
@@ -84,5 +125,6 @@ func (f *FriendDAO) Find(user *models.Friend) (map[string]bool, error) {
 			results[friend.UserID] = true
 		}
 	}
+
 	return results, nil
 }

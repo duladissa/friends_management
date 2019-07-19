@@ -55,7 +55,7 @@ func (f *FriendsAPI) PostFriendsConnections(ctx context.Context, params friends.
 
 // PostFriendsConnectionsList is 2. As a user, I need an API to retrieve the friends list for an email address.
 func (f *FriendsAPI) PostFriendsConnectionsList(ctx context.Context, params friends.PostFriendsConnectionsListParams) middleware.Responder {
-	response, err := f.friend.Find(params.Body)
+	response, err := f.friend.FindFriends(params.Body)
 	isSuccess := false
 	if err != nil {
 		errorResponse := models.ErrorResponse{
@@ -81,7 +81,24 @@ func (f *FriendsAPI) PostFriendsConnectionsList(ctx context.Context, params frie
 
 // PostFriendsCommonList is 3. As a user, I need an API to retrieve the common friends list between two email addresses.
 func (f *FriendsAPI) PostFriendsCommonList(ctx context.Context, params friends.PostFriendsCommonListParams) middleware.Responder {
-	return nil
+	response, err := f.friend.FindCommonFriends(params.Body)
+	isSuccess := false
+	if err != nil || len(response) == 0 {
+		errorResponse := models.ErrorResponse{
+			Success: &isSuccess,
+			Message: "No common friends available",
+			Type:    "exception",
+		}
+		return friends.NewPostFriendsCommonListNotFound().WithPayload(&errorResponse)
+	}
+	isSuccess = true
+	friendsList := models.FriendsListResponse{
+		Success: &isSuccess,
+		Friends: response,
+		Count:   int64(len(response)),
+	}
+
+	return friends.NewPostFriendsCommonListOK().WithPayload(&friendsList)
 }
 
 // PostFriendsUpdatesSubscribe is 4. As a user, I need an API to subscribe to updates from an email address.</br> Please note that subscribing to updates is NOT equivalent to adding a friend connection
