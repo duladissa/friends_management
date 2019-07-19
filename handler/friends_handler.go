@@ -55,7 +55,28 @@ func (f *FriendsAPI) PostFriendsConnections(ctx context.Context, params friends.
 
 // PostFriendsConnectionsList is 2. As a user, I need an API to retrieve the friends list for an email address.
 func (f *FriendsAPI) PostFriendsConnectionsList(ctx context.Context, params friends.PostFriendsConnectionsListParams) middleware.Responder {
-	return nil
+	response, err := f.friend.Find(params.Body)
+	isSuccess := false
+	if err != nil {
+		errorResponse := models.ErrorResponse{
+			Success: &isSuccess,
+			Message: err.Error(),
+			Type:    "exception",
+		}
+		return friends.NewPostFriendsConnectionsListNotFound().WithPayload(&errorResponse)
+	}
+	isSuccess = true
+	friendsNames := make([]string, 0)
+	for k := range response {
+		friendsNames = append(friendsNames, k)
+	}
+	friendsList := models.FriendsListResponse{
+		Success: &isSuccess,
+		Friends: friendsNames,
+		Count:   int64(len(response)),
+	}
+
+	return friends.NewPostFriendsConnectionsListOK().WithPayload(&friendsList)
 }
 
 // PostFriendsCommonList is 3. As a user, I need an API to retrieve the common friends list between two email addresses.

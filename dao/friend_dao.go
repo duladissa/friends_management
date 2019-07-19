@@ -52,6 +52,37 @@ func (f *FriendDAO) Create(friends *models.Friends) (bool, error) {
 }
 
 //Find ... Find friends for a given user
-func (f *FriendDAO) Find(user *models.Friend) {
+func (f *FriendDAO) Find(user *models.Friend) (map[string]bool, error) {
+	db, session := f.database.GetSession()
+	defer session.Close()
 
+	collection := db.C(FriendsCollection)
+	//Sanitizing the emails
+	userID := strings.ToLower(user.Email)
+
+	friends := make([]models.DBFriends, 0)
+	condition1 := bson.M{"user_id": userID}
+	collection.Find(condition1).All(&friends)
+
+	beingAFriend := make([]models.DBFriends, 0)
+	condition2 := bson.M{"friends": userID}
+	collection.Find(condition2).All(&beingAFriend)
+
+	results := make(map[string]bool, 0)
+	if len(friends) == 0 && len(beingAFriend) == 0 {
+		return results, errors.New("Not found any friends")
+	}
+
+	for _, friend := range friends {
+		if !results[friend.Friends[0]] {
+			results[friend.Friends[0]] = true
+		}
+	}
+
+	for _, friend := range beingAFriend {
+		if !results[friend.UserID] {
+			results[friend.UserID] = true
+		}
+	}
+	return results, nil
 }
