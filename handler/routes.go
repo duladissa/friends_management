@@ -1,16 +1,18 @@
 package handler
 
-import(
+import (
 	"net/http"
-	"github.com/spf13/viper"
-	"github.com/kataras/golog"
+
 	"github.com/duladissa/friends_management/restapi"
+	"github.com/kataras/golog"
+	"github.com/spf13/viper"
 )
 
 //InitHandlersAndRoutes ... All the routes
 func InitHandlersAndRoutes(envConfig *viper.Viper) http.Handler {
 	config := restapi.Config{
-		Logger:          golog.Debugf,
+		FriendsAPI: NewFriendsAPI(),
+		Logger:     golog.Debugf,
 	}
 	handler, err := restapi.Handler(config)
 
