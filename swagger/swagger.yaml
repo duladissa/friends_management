@@ -335,7 +335,7 @@ definitions:
     description: List of friends along with the success.
     required:
       - success
-      - friends
+      - recipients
     properties:
       success:
         type: boolean
