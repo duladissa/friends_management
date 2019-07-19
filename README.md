@@ -8,3 +8,21 @@ Friends Management API
 2. To validate Swagger yml file: `swagger validate swagger/swagger.yaml`
 
 3. To generate Go Server components and docs: `swagger generate server -A friends-management -f swagger/swagger.yaml`
+
+## Installation
+Using Docker Compose
+To Setup the images:
+
+* `$ docker-compose build`
+
+To Start the development server:
+
+* `$ docker-compose up`
+
+To stop the development server:
+
+* `$ docker-compose stop`
+
+Stop Docker development server and remove containers:
+
+* `$ docker-compose down`
