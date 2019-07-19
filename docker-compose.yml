@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  server:
+    container_name: 'friends_management_server'
+    build: .
+    ports:
+      - '8888:8888'
+    depends_on:
+      - 'mongo'
+  mongo:
+    image: 'mongo:latest'
+    container_name: 'mongo'
+    ports:
+      - '27100:27017'
