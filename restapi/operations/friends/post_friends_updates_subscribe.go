@@ -31,7 +31,7 @@ func NewPostFriendsUpdatesSubscribe(ctx *middleware.Context, handler PostFriends
 
 /*PostFriendsUpdatesSubscribe swagger:route POST /friends/updates/subscribe friends postFriendsUpdatesSubscribe
 
-Subscribe to a given users updates.
+4. Subscribe to a given users updates.
 
 4. As a user, I need an API to subscribe to updates from an email address.</br> Please note that subscribing to updates is NOT equivalent to adding a friend connection
 

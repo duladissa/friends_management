@@ -31,7 +31,7 @@ func NewPostFriendsConnections(ctx *middleware.Context, handler PostFriendsConne
 
 /*PostFriendsConnections swagger:route POST /friends/connections friends postFriendsConnections
 
-Create connections between two given users.
+1. Create connections between two given users.
 
 1. As a user, I need an API to create a friend connection between two email addresses.
 

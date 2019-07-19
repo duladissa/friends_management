@@ -31,7 +31,7 @@ func NewPostFriendsUpdatesBlock(ctx *middleware.Context, handler PostFriendsUpda
 
 /*PostFriendsUpdatesBlock swagger:route POST /friends/updates/block friends postFriendsUpdatesBlock
 
-Block a given users updates.
+5. Block a given users updates.
 
 5. As a user, I need an API to block updates from an email address.</br> Suppose andy@example.com blocks john@example.com:</br> <ul> <li>if they are connected as friends, then andy will no longer receive notifications from john</li> <li>if they are not connected as friends, then no new friends connection can be added</li> </ul>
 

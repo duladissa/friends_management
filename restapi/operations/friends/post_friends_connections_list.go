@@ -31,7 +31,7 @@ func NewPostFriendsConnectionsList(ctx *middleware.Context, handler PostFriendsC
 
 /*PostFriendsConnectionsList swagger:route POST /friends/connections/list friends postFriendsConnectionsList
 
-Retrieve the friends list for a given user.
+2. Retrieve the friends list for a given user.
 
 2. As a user, I need an API to retrieve the friends list for an email address.
 

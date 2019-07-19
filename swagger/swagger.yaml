@@ -21,7 +21,7 @@ paths:
     post:
       tags:
         - friends
-      summary: Create connections between two given users.
+      summary: 1. Create connections between two given users.
       description: 1. As a user, I need an API to create a friend connection between two email addresses.
       operationId: postFriendsConnections
       parameters:
@@ -58,7 +58,7 @@ paths:
     post:
       tags:
         - friends
-      summary: Retrieve the friends list for a given user.
+      summary: 2. Retrieve the friends list for a given user.
       description: 2. As a user, I need an API to retrieve the friends list for an email address.
       operationId: postFriendsConnectionsList
       parameters:
@@ -95,7 +95,7 @@ paths:
     post:
       tags:
         - friends
-      summary: Retrieve the common friends list for two given user.
+      summary: 3. Retrieve the common friends list for two given user.
       description: 3. As a user, I need an API to retrieve the common friends list between two email addresses.
       operationId: postFriendsCommonList
       parameters:
@@ -132,7 +132,7 @@ paths:
     post:
       tags:
         - friends
-      summary: Subscribe to a given users updates.
+      summary: 4. Subscribe to a given users updates.
       description: "4. As a user, I need an API to subscribe to updates from an email address.</br>
       Please note that subscribing to updates is NOT equivalent to adding a friend connection"
       operationId: postFriendsUpdatesSubscribe
@@ -170,7 +170,7 @@ paths:
     post:
       tags:
         - friends
-      summary: Block a given users updates.
+      summary: 5. Block a given users updates.
       description: "5. As a user, I need an API to block updates from an email address.</br>
       Suppose andy@example.com blocks john@example.com:</br>
       <ul>
@@ -213,7 +213,7 @@ paths:
     post:
       tags:
         - friends
-      summary: Retrieve all users who can receive updates from given user.
+      summary: 6. Retrieve all users who can receive updates from given user.
       description: "6. As a user, I need an API to retrieve all email addresses that can receive updates from an email address.</br>
       Eligibility for receiving updates from i.e. john@example.com</br>
       <ul>

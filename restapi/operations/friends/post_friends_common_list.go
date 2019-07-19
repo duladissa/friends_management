@@ -31,7 +31,7 @@ func NewPostFriendsCommonList(ctx *middleware.Context, handler PostFriendsCommon
 
 /*PostFriendsCommonList swagger:route POST /friends/common/list friends postFriendsCommonList
 
-Retrieve the common friends list for two given user.
+3. Retrieve the common friends list for two given user.
 
 3. As a user, I need an API to retrieve the common friends list between two email addresses.
 

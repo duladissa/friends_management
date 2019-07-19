@@ -46,7 +46,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Retrieve the common friends list for two given user.",
+        "summary": "3. Retrieve the common friends list for two given user.",
         "operationId": "postFriendsCommonList",
         "parameters": [
           {
@@ -99,7 +99,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Create connections between two given users.",
+        "summary": "1. Create connections between two given users.",
         "operationId": "postFriendsConnections",
         "parameters": [
           {
@@ -152,7 +152,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Retrieve the friends list for a given user.",
+        "summary": "2. Retrieve the friends list for a given user.",
         "operationId": "postFriendsConnectionsList",
         "parameters": [
           {
@@ -205,7 +205,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Block a given users updates.",
+        "summary": "5. Block a given users updates.",
         "operationId": "postFriendsUpdatesBlock",
         "parameters": [
           {
@@ -258,7 +258,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Retrieve all users who can receive updates from given user.",
+        "summary": "6. Retrieve all users who can receive updates from given user.",
         "operationId": "postFriendsUpdatesList",
         "parameters": [
           {
@@ -311,7 +311,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Subscribe to a given users updates.",
+        "summary": "4. Subscribe to a given users updates.",
         "operationId": "postFriendsUpdatesSubscribe",
         "parameters": [
           {
@@ -546,7 +546,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Retrieve the common friends list for two given user.",
+        "summary": "3. Retrieve the common friends list for two given user.",
         "operationId": "postFriendsCommonList",
         "parameters": [
           {
@@ -599,7 +599,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Create connections between two given users.",
+        "summary": "1. Create connections between two given users.",
         "operationId": "postFriendsConnections",
         "parameters": [
           {
@@ -652,7 +652,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Retrieve the friends list for a given user.",
+        "summary": "2. Retrieve the friends list for a given user.",
         "operationId": "postFriendsConnectionsList",
         "parameters": [
           {
@@ -705,7 +705,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Block a given users updates.",
+        "summary": "5. Block a given users updates.",
         "operationId": "postFriendsUpdatesBlock",
         "parameters": [
           {
@@ -758,7 +758,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Retrieve all users who can receive updates from given user.",
+        "summary": "6. Retrieve all users who can receive updates from given user.",
         "operationId": "postFriendsUpdatesList",
         "parameters": [
           {
@@ -811,7 +811,7 @@ func init() {
         "tags": [
           "friends"
         ],
-        "summary": "Subscribe to a given users updates.",
+        "summary": "4. Subscribe to a given users updates.",
         "operationId": "postFriendsUpdatesSubscribe",
         "parameters": [
           {

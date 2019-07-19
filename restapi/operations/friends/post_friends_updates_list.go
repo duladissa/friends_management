@@ -31,7 +31,7 @@ func NewPostFriendsUpdatesList(ctx *middleware.Context, handler PostFriendsUpdat
 
 /*PostFriendsUpdatesList swagger:route POST /friends/updates/list friends postFriendsUpdatesList
 
-Retrieve all users who can receive updates from given user.
+6. Retrieve all users who can receive updates from given user.
 
 6. As a user, I need an API to retrieve all email addresses that can receive updates from an email address.</br> Eligibility for receiving updates from i.e. john@example.com</br> <ul> <li>has not blocked updates from john@example.com, and</li> <li>at least one of the following:</li> <ul> <li>has a friend connection with john@example.com</li> <li>has subscribed to updates from john@example.com</li> <li>has been @mentioned in the update</li> </ul> </ul>
 
